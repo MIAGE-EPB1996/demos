@@ -1,0 +1,28 @@
+name: Python application
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        cd python/python_testing
+        python -m pip install --upgrade pip
+        pip install fastapi pytest
+
+    - name: Run tests
+      run: |
+        cd python/python_testing
+        pytest
